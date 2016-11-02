@@ -1,0 +1,69 @@
+<div ui-view>
+    <list-navbar>
+        <list-navbar-section side="'left'">
+            <list-navbar-filters active-filters="activeFilters" metadata="metadata"
+                                 custom-filters-visible="true" filters-updated="filtersUpdated(filters)">
+                <label>Name Contains
+                    <input type="text" ng-model="simpleFilters.nameContains" ng-change="recompileSimpleFilters()" />
+                </label>
+            </list-navbar-filters>
+        </list-navbar-section>
+
+        <list-navbar-section side="'right'">
+            <list-navbar-sorting metadata="metadata" current-sort-name="searchSettings.orderBy"
+                                 current-sort-direction="searchSettings.orderDirection"
+                                 sort-updated="sortUpdated(sortName, sortDirection)"></list-navbar-sorting>
+
+            <list-navbar-paging current-paging="searchSettings.elementsPerPage" available-paging="metadata.availablePaging"
+                                paging-updated="pagingUpdated(paging)"></list-navbar-paging>
+        </list-navbar-section>
+    </list-navbar>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+
+    <div class="items database artifacts list" ng-class="listLoading ? 'loading' : ''">
+        <div class="database artifact group" ng-class="searchSettings.groupBy != '' ? 'active' : ''"
+             ng-repeat="artifactGroup in data">
+            <span class="group-title">{{ artifactGroup.groupName }}</span>
+
+            <div class="database artifact panel" ng-repeat="artifact in artifactGroup.data"
+                 ng-class="artifact.deleted_at ? 'deleted' : ''">
+                <div class="row">
+                    <div class="columns large-12">
+                        <item-admin-bar item="artifact" permission-namespace="'artifacts'"
+                                        delete-method="deleteItem(item)" restore-method="restoreItem(item)">
+
+                        </item-admin-bar>
+                    </div>
+                </div>
+
+                <div class="item-description">
+                    <img ng-src="/images/illust/{{ artifact.ImgFileName }}.png" class="item-image"/>
+
+                    <a class="title" ui-sref="app.database.items.artifacts.view({id: artifact.ID})">{{ artifact.ItemName }}</a>
+                    <small class="subtitle">{{ artifact.ReqToolTip }}</small>
+
+                    <div class="description" ng-bind-html="artifact.ParsedDesc"></div>
+                </div>
+
+                <div class="row">
+                    <div class="columns medium-12">
+                        <div class="orange highlight-panel database-options">
+                            <span class="orange highlight-panel-title">Base Stats</span>
+
+                            <ul ng-bind-html="artifact.StatsHTML"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+</div>

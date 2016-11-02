@@ -1,0 +1,66 @@
+<div ui-view>
+    <list-navbar>
+        <list-navbar-section side="'left'">
+            <list-navbar-filters active-filters="activeFilters" metadata="metadata"
+                                 custom-filters-visible="true" filters-updated="filtersUpdated(filters)">
+                <label>Name Contains
+                    <input type="text" ng-model="simpleFilters.nameContains" ng-change="recompileSimpleFilters()" />
+                </label>
+            </list-navbar-filters>
+
+            <list-navbar-grouping metadata="metadata" current-grouping-name="searchSettings.groupBy"
+                                  current-grouping-direction="searchSettings.groupOrderDirection"
+                                  grouping-updated="groupingUpdated(groupingName, groupingDirection)"
+                                  none-filter-enabled="true"></list-navbar-grouping>
+        </list-navbar-section>
+
+        <list-navbar-section side="'right'">
+            <list-navbar-sorting metadata="metadata" current-sort-name="searchSettings.orderBy"
+                                 current-sort-direction="searchSettings.orderDirection"
+                                 sort-updated="sortUpdated(sortName, sortDirection)"></list-navbar-sorting>
+
+            <list-navbar-paging current-paging="searchSettings.elementsPerPage" available-paging="metadata.availablePaging"
+                                paging-updated="pagingUpdated(paging)"></list-navbar-paging>
+        </list-navbar-section>
+    </list-navbar>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+
+    <div class="items database stances list" ng-class="listLoading ? 'loading' : ''">
+        <div class="database stance group" ng-class="searchSettings.groupBy != '' ? 'active' : ''"
+             ng-repeat="stanceGroup in data">
+            <span class="group-title">{{ stanceGroup.groupName }}</span>
+
+            <div class="database stance panel" ng-repeat="stance in stanceGroup.data"
+                 ng-class="stance.deleted_at ? 'deleted' : ''">
+
+
+                <div class="item-description">
+                    <img ng-src="/images/illust/{{ stance.ImgFileName }}.png" class="item-image"/>
+
+                    <a class="title" ui-sref="app.database.stances.view({id: stance.ID})">{{ stance.Name }}</a>
+
+                    <div class="description" ng-bind-html="stance.ParsedDesc"></div>
+                </div>
+
+                <div class="row" vertilize-container>
+                    <div class="columns medium-12">
+                        <div class="blue highlight-panel database-options" vertilize>
+                            <span class="blue highlight-panel-title">Stats</span>
+
+                            <ul ng-bind-html="stance.StatsHTML"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+</div>

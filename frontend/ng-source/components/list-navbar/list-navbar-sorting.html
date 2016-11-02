@@ -1,0 +1,14 @@
+<li>
+    <div tooltip-html-unsafe="<span class='list-navbar-tooltip'><p>Sorted by {{ metadata.columns[currentSortName] }} ({{ currentSortDirection == 'Asc' ? 'Ascending' : 'Descending' }})</p> <p><em>(Click to change)</em></p></span>" tooltip-placement="bottom">
+        <a dropdown-toggle=".sorting-dropdown">
+            <span class="icon" ng-class="currentSortDirection == 'Asc' ? 'fi-arrow-up' : 'fi-arrow-down'" />
+            {{ metadata.columns[currentSortName] }}
+        </a>
+    </div>
+
+    <ul class="f-dropdown list-navbar-dropdown sorting-dropdown">
+        <li ng-repeat="availableSort in metadata.availableSorts" ng-click="signalSortUpdated(availableSort.sortName, availableSort.sortDirection)" ng-class="currentSortName == availableSort.sortName && currentSortDirection == availableSort.sortDirection ? 'active' : ''">
+            Sort by {{ metadata.columns[availableSort.sortName] }} ({{ availableSort.sortDirection == 'Asc' ? 'Ascending' : 'Descending' }})
+        </li>
+    </ul>
+</li>

@@ -1,0 +1,16 @@
+<h2>{{ pageTitle }}</h2>
+
+<div ui-view>
+    <div class="admin navbar panel" ng-show="permissions.blog.new">
+        <button class="success button small" ng-hide="isEditing" ng-disabled="!permissions.blog.new" ui-sref="app.blog.new">New Post</button>
+    </div>
+
+    <div ng-repeat="blogPost in blogPosts" class="blog-post panel">
+        <h3>{{ blogPost.title }}</h3>
+        <small>Last updated {{ blogPost.updated_at }}</small>
+
+        <div marked="blogPost.content" class="changelog-view">
+
+        </div>
+    </div>
+</div>

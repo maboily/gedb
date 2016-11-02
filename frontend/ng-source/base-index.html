@@ -1,0 +1,114 @@
+<div ng-hide="globalLoading">
+    <top-bar>
+        <ul class="title-area">
+            <li class="name">
+                <h1>&nbsp;</h1>
+            </li>
+            <li toggle-top-bar class="menu-icon"><a href="javascript: void(0)">Menu</a></li>
+        </ul>
+
+        <top-bar-section>
+            <ul class="left">
+                <li ui-sref-active="active"><a ui-sref="app.home">Home</a></li>
+
+                <li ui-sref-active="active" ng-show="permissions.database.anyValue" ng-class="{ active: $state.includes('app.database') }" has-dropdown>
+                    <a href="javascript: void(0)">Database</a>
+                    <ul top-bar-dropdown>
+                        <li ui-sref-active="active"><a ui-sref="app.database.items" ng-show="permissions.database.items.view">Items</a></li>
+                        <li ui-sref-active="active"><a ui-sref="app.database.skills" ng-show="permissions.database.skills.view">Skills</a></li>
+                        <li ui-sref-active="active"><a ui-sref="app.database.stances" ng-show="permissions.database.stances.view">Stances</a></li>
+                    </ul>
+                </li>
+
+                <li ng-show="permissions.admin.anyValue" has-dropdown ng-class="{ active: $state.includes('app.admin') }">
+                    <a href="javascript: void(0)">Administration</a>
+                    <ul top-bar-dropdown>
+                        <li ui-sref-active="active"><a ui-sref="app.admin.users" ng-show="permissions.admin.users.view">Users</a></li>
+                        <li ui-sref-active="active"><a ui-sref="app.admin.groups" ng-show="permissions.admin.groups.view">Groups</a></li>
+                    </ul>
+                </li>
+
+                <li ng-show="permissions.tools.anyValue" has-dropdown>
+                    <a href="javascript: void(0)">Server Tools</a>
+                    <ul top-bar-dropdown>
+                        <li ui-sref-active="active"><a ui-sref="app.server-tools.changelog">Server Changelog</a></li>
+                        <li ui-sref-active="active"><a ui-sref="app.server-tools.cw-map">Colony War Maps</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </top-bar-section>
+    </top-bar>
+
+    <section class="main-section">
+        <div class="row">
+            <div class="alerts-box">
+                <alert ng-repeat="alert in alerts" type="alert.type" close="removeAlert($index)">{{ alert.message }}</alert>
+            </div>
+
+            <div ui-view></div>
+        </div>
+    </section>
+</div>
+
+
+
+
+<!--<div class="ui fluid inverted vertical menu">
+    <div class="header item"><i
+            class="home icon"/> Main Website
+    </div>
+    <a class="item" ui-sref="app.home" ui-sref-active="active">Home</a>
+
+    <div class="header item" ng-show="hasPermission('database.*')"><i
+            class="tasks icon"/> Database
+    </div>
+    <a class="item" ui-sref="app.database" ui-sref-active="active"
+       ng-show="hasPermission('database.view')">Index</a>
+    <a class="item" ui-sref="app.database.items" ui-sref-active="active"
+       ng-show="hasPermission('database.items.view')">Items</a>
+    <a class="item" ui-sref="app.database.monsters" ui-sref-active="active"
+       ng-show="hasPermission('database.monsters.view')">Monsters</a>
+    <a class="item" ui-sref="app.database.characters" ui-sref-active="active"
+       ng-show="hasPermission('database.characters.view')">Characters</a>
+
+    <div class="header item"><i class="user icon"/> User</div>
+
+    <span>
+        <div class="item" ng-show="!user.isConnected">
+            <div class="ui side login form inverted">
+                <div class="field">
+                    <label>Username</label>
+                    <input type="text" ng-model="loginCredentials.username"/>
+                </div>
+
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password"
+                           ng-model="loginCredentials.password"/>
+                </div>
+
+                <a class="ui inverted basic fluid button"
+                   ng-click="attemptLogin()">Login</a>
+            </div>
+        </div>
+
+        <a class="item" ng-click="logout()"
+           ng-show="user.isConnected">Logout</a>
+    </span>
+
+    <div class="header item" ng-show="hasPermission('admin.*')"><i
+            class="settings icon"/> Administration
+    </div>
+    <a class="item" ui-sref="main.admin" ui-sref-active="active"
+       ng-show="hasPermission('admin.dashboard.view')">Dashboard</a>
+    <a class="item" ui-sref="main.admin.users" ui-sref-active="active"
+       ng-show="hasPermission('admin.users.view')">Users</a>
+</div>
+</div>
+
+<div class="ui main container">
+<div class="ui main grid">
+    <div class="sixteen large column">
+        <section ui-view></section>
+    </div>
+</div>-->

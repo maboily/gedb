@@ -1,0 +1,57 @@
+<div ui-view>
+    <list-navbar>
+        <list-navbar-section side="'left'">
+            <list-navbar-filters active-filters="activeFilters" metadata="metadata"
+                                 custom-filters-visible="true" filters-updated="filtersUpdated(filters)">
+                <label>Email Contains
+                    <input type="text" ng-model="simpleFilters.nameContains" ng-change="recompileSimpleFilters()" />
+                </label>
+            </list-navbar-filters>
+        </list-navbar-section>
+
+        <list-navbar-section side="'right'">
+            <list-navbar-sorting metadata="metadata" current-sort-name="searchSettings.orderBy"
+                                 current-sort-direction="searchSettings.orderDirection"
+                                 sort-updated="sortUpdated(sortName, sortDirection)"></list-navbar-sorting>
+
+            <list-navbar-paging current-paging="searchSettings.elementsPerPage" available-paging="metadata.availablePaging"
+                                paging-updated="pagingUpdated(paging)"></list-navbar-paging>
+        </list-navbar-section>
+    </list-navbar>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="15"></pagination>
+    </div>
+
+    <div class="admin navbar panel">
+        <button class="success button small" ui-sref="app.admin.groups.new" ng-disabled="!permissions.admin.groups.new">New Group</button>
+    </div>
+
+    <table class="default-table" ng-class="listLoading ? 'loading' : ''">
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr ng-repeat="group in data">
+            <td>{{ group.name }}</td>
+            <td>
+                <button class="button tiny" ui-sref="app.admin.groups.edit({id: group.id })" ng-disabled="!permissions.admin.groups.edit">Edit</button>
+                <button class="alert button tiny" ng-click="deleteGroup(group)" ng-show="!user.deleted_at" ng-disabled="!permissions.admin.groups.delete">Delete</button>
+                <button class="success button tiny" ng-click="restoreUser(group)" ng-show="user.deleted_at" ng-disabled="!permissions.admin.groups.delete">Restore</button>
+            </td>
+        </tr>
+
+        <tr ng-hide="data.length">
+            <td colspan="2">
+                <em>No results were found</em>
+            </td>
+        </tr>
+    </table>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="15"></pagination>
+    </div>
+</div>

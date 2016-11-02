@@ -1,0 +1,40 @@
+<div ui-view>
+    <div class="admin navbar panel" ng-show="permissions.tools.cwMap.new || permissions.tools.cwMap.edit">
+        <button class="success button small" ng-hide="isEditing" ng-disabled="!permissions.tools.cwMap.new" ng-click="createNewCWMap()">New Colony War Map</button>
+        <button class="warning button small" ng-hide="isEditing" ng-disabled="!permissions.tools.cwMap.edit || !currentCWMap.id" ng-click="editCurrentCWMap()">Edit Colony War Map</button>
+        <button class="alert button small" ng-hide="isEditing" ng-disabled="!permissions.tools.cwMap.delete || !currentCWMap.id" ng-click="deleteCurrentCWMap()">Delete Colony War Map</button>
+        <button class="success button small" ng-show="isEditing" ng-click="saveChanges()">Save</button>
+        <button class="alert button small" ng-show="isEditing" ng-click="cancelChanges()">Cancel</button>
+    </div>
+
+    <div class="datepicker panel">
+        <span ng-switch="isEditing">
+            <span ng-switch-when="true">
+                <label>Colony War date
+                    <input type="text" ng-model="editingCWMap.cw_date" />
+                </label>
+            </span>
+
+            <span ng-switch-default>
+                <select ng-options="cwMapOccupation.id as cwMapOccupation.cw_date for cwMapOccupation in cwMapOccupations" ng-change="loadMap(currentCWMapOccupationId)" ng-model="currentCWMapOccupationId">
+                    <option value="">(Select a date)</option>
+                </select>
+            </span>
+        </span>
+    </div>
+
+    <div class="cw-map-frame">
+        <img src="images/map_orpesia.jpg" class="cw-map-picture" />
+
+        <span ng-switch="isEditing" ng-repeat="cwOccupationPoint in cwPossibleOccupations" class="cw-map-point" ng-style="{ 'left': cwOccupationPoint.x_location - 100 + 'px', 'top': cwOccupationPoint.y_location + 'px' }">
+            <span ng-switch-when="true">
+                <input type="text" class="cw-map-point-edit" ng-model="editingCWMap.occupations[cwOccupationPoint.id]" />
+            </span>
+
+            <span ng-switch-default>
+                {{ currentCWMap.occupations[cwOccupationPoint.id] }}
+            </span>
+        </span>
+
+    </div>
+</div>

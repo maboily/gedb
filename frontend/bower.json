@@ -1,0 +1,25 @@
+{
+  "name": "librairies",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.3.6",
+    "ace-builds": "1.1.8",
+    "angular-animate": "1.3.6",
+    "angular-breadcrumb": "0.3.2*",
+    "angular-foundation": "0.5.1",
+    "ngprogress": "1.0.7",
+    "jquery": "2.1.1",
+    "angular-sanitize": "1.3.6",
+    "ngSticky": "1.7.5",
+    "angular-ui-router": "0.2.13",
+    "angular-marked": "0.0.12",
+    "angular-vertilize": "1.0.0",
+    "ng-file-upload": "2.2.2",
+    "requirejs": "*"
+  },
+  "resolutions": {
+    "angular": "1.3.6"
+  }
+}

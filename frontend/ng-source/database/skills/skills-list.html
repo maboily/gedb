@@ -1,0 +1,103 @@
+<div ui-view>
+    <list-navbar>
+        <list-navbar-section side="'left'">
+            <list-navbar-filters active-filters="activeFilters" metadata="metadata"
+                                 custom-filters-visible="true" filters-updated="filtersUpdated(filters)">
+                <label>Name Contains
+                    <input type="text" ng-model="simpleFilters.nameContains" ng-change="recompileSimpleFilters()" />
+                </label>
+
+                <label>Skill Type is
+                    <select ng-model="simpleFilters.skillType" ng-change="recompileSimpleFilters()">
+                        <option value="">(Any)</option>
+                        <option value="{{ skillType }}" ng-repeat="skillType in metadata.availableFilters.SkillType.values | orderBy:skillType">{{ skillType }}</option>
+                    </select>
+                </label>
+            </list-navbar-filters>
+
+            <list-navbar-grouping metadata="metadata" current-grouping-name="searchSettings.groupBy"
+                                  current-grouping-direction="searchSettings.groupOrderDirection"
+                                  grouping-updated="groupingUpdated(groupingName, groupingDirection)"
+                                  none-filter-enabled="true"></list-navbar-grouping>
+        </list-navbar-section>
+
+        <list-navbar-section side="'right'">
+            <list-navbar-sorting metadata="metadata" current-sort-name="searchSettings.orderBy"
+                                 current-sort-direction="searchSettings.orderDirection"
+                                 sort-updated="sortUpdated(sortName, sortDirection)"></list-navbar-sorting>
+
+            <list-navbar-paging current-paging="searchSettings.elementsPerPage" available-paging="metadata.availablePaging"
+                                paging-updated="pagingUpdated(paging)"></list-navbar-paging>
+        </list-navbar-section>
+    </list-navbar>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+
+    <div class="items database skills list" ng-class="listLoading ? 'loading' : ''">
+        <div class="database skill group" ng-class="searchSettings.groupBy != '' ? 'active' : ''"
+             ng-repeat="skillGroup in data">
+            <span class="group-title">{{ skillGroup.groupName }}</span>
+
+            <div class="database skill panel" ng-repeat="skill in skillGroup.data"
+                 ng-class="skill.deleted_at ? 'deleted' : ''">
+
+
+                <div class="item-description">
+                    <img ng-src="/images/illust/{{ skill.ImgFileName }}.png" class="item-image"/>
+
+                    <a class="title" ui-sref="app.database.skills.view({id: skill.ID})">{{ skill.Name }}</a>
+
+                    <div class="description" ng-bind-html="skill.ParsedDesc"></div>
+                </div>
+
+                <div class="row" vertilize-container>
+                    <div class="columns medium-4">
+                        <div class="green highlight-panel database-options" vertilize>
+                            <span class="green highlight-panel-title">Usage</span>
+
+                            <ul ng-bind-html="skill.UsageHTML"></ul>
+                        </div>
+                    </div>
+
+                    <div class="columns medium-3">
+                        <div class="blue highlight-panel database-options" vertilize>
+                            <span class="blue highlight-panel-title">Additional Stats</span>
+
+                            <ul ng-bind-html="skill.AdditionalStatsHTML"></ul>
+                        </div>
+                    </div>
+
+                    <div class="columns medium-5">
+                        <ul class="labeled-panel-list title-size-100" vertilize>
+                            <li>
+                                <span class="green labeled-panel-title">Level 1</span>
+
+                                <span class="labeled-panel-content" ng-bind-html="skill.LevelsHTML.Level1"></span>
+                            </li>
+
+                            <li>
+                                <span class="orange labeled-panel-title">Level 10</span>
+
+                                <span class="labeled-panel-content" ng-bind-html="skill.LevelsHTML.Level10"></span>
+                            </li>
+
+                            <li>
+                                <span class="red labeled-panel-title">Level 12</span>
+
+                                <span class="labeled-panel-content" ng-bind-html="skill.LevelsHTML.Level12"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+</div>

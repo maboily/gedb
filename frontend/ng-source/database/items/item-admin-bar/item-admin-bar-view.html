@@ -1,0 +1,7 @@
+<a class="button tiny warning" ng-show="!item.deleted_at && $root.permissions.database.items[permissionNamespace].delete" ng-click="deleteItem(item)">
+    <i class="fi-minus"></i> Hide to users
+</a>
+
+<a class="button tiny success" ng-show="item.deleted_at && $root.permissions.database.items[permissionNamespace].delete" ng-click="restoreItem(item)">
+    <i class="fi-plus"></i> Show to users
+</a>

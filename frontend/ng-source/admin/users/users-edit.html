@@ -1,0 +1,48 @@
+<div ui-view>
+    <div class="admin navbar panel">
+        <button class="success button tiny" ng-click="saveUser()">Save</button>
+        <button class="alert button tiny" ui-sref="app.admin.users">Cancel</button>
+    </div>
+
+    <h3>General Information</h3>
+
+    <div class="form-section panel">
+        <div class="row">
+            <div class="large-12 columns">
+                <foundation-text model="user.email" validation-errors="validationErrors.username" label="'Email'" />
+            </div>
+        </div>
+    </div>
+
+    <h3>Password Management</h3>
+
+    <div class="form-section panel">
+        <p>Enter something in the following inputs if you wish to reset the password for this account. If left blank, the password will not be changed.</p>
+
+        <div class="row">
+            <div class="large-12 columns">
+                <foundation-text model="user.password" validation-errors="validationErrors.password" label="'Password'" is-password="true" />
+            </div>
+
+            <div class="large-12 columns">
+                <foundation-text model="user.passwordConfirm" validation-errors="validationErrors.passwordConfirm" label="'Password (confirm)'" is-password="true" />
+            </div>
+        </div>
+    </div>
+
+    <h3>Permissions</h3>
+
+
+    <div class="permissions-listing panel">
+        <section ng-repeat="permissionCategory in permissionCategories">
+            <h4>{{ permissionCategory.name }}</h4>
+
+            <foundation-checkbox ng-repeat="permission in permissionCategory.permissions" model="permission.isAssigned" label="permission.description" />
+        </section>
+    </div>
+
+    <div class="admin navbar panel">
+        <button class="success button tiny" ng-click="saveUser()">Save</button>
+        <button class="alert button tiny" ui-sref="app.admin.users">Cancel</button>
+    </div>
+</div>

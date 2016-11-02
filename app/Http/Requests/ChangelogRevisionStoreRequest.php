@@ -1,0 +1,17 @@
+<?php namespace GEDB\Http\Requests;
+
+use GEDB\Http\Requests\APIFormRequest;
+
+class ChangelogRevisionStoreRequest extends APIFormRequest {
+    public function rules()
+    {
+        return [
+
+        ];
+    }
+
+    public function authorize()
+    {
+        return true;
+    }
+}

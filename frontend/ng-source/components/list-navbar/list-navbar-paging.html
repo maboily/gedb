@@ -1,0 +1,12 @@
+<li>
+    <div tooltip-placement="bottom" tooltip-html-unsafe="<span class='list-navbar-tooltip'><p>Showing {{ currentPaging }} elements per page.</p> <p><em>(Click to change)</em></p></span>">
+        <a dropdown-toggle=".paging-dropdown">
+            <span class="fi-list-bullet icon" />
+            {{ currentPaging }}
+        </a>
+    </div>
+
+    <ul class="f-dropdown list-navbar-dropdown paging-dropdown">
+        <li ng-repeat="paging in availablePaging" ng-click="signalPagingUpdated(paging)" ng-class="paging == currentPaging ? 'active' : ''">{{ paging }}</li>
+    </ul>
+</li>

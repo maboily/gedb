@@ -1,0 +1,51 @@
+<div ui-view>
+    <div class="database loading panel" ng-show="itemLoading"></div>
+    <div ng-hide="itemLoading">
+        <div class="database faceCostume panel">
+            <div class="item-description">
+                <img ng-src="/images/illust/{{ data.ImgFileName }}.png" class="item-image"/>
+
+                <a class="title">{{ data.ItemName }}</a>
+                <small class="subtitle">{{ data.ReqToolTip }}</small>
+
+                <div class="description" ng-bind-html="data.ParsedDesc"></div>
+            </div>
+
+            <div class="row" vertilize-container>
+                <div class="columns medium-6">
+                    <div class="green highlight-panel database-options" vertilize>
+                        <span class="green highlight-panel-title">Stats</span>
+
+                        <ul ng-bind-html="data.StatsHTML"></ul>
+                    </div>
+                </div>
+
+                <div class="columns medium-6">
+                    <div class="red highlight-panel database-options" vertilize>
+                        <span class="red highlight-panel-title">Recipe</span>
+
+                        <ul ng-bind-html="data.RecipeHTML"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span ng-show="permissions.database.items.faceCostumes.extendedView">
+            <h3>Column Details</h3>
+
+            <div class="database panel">
+                <table class="default-table" role="grid">
+                    <tr>
+                        <th width="200">Base Name</th>
+                        <th>Data</th>
+                    </tr>
+
+                    <tr ng-repeat="(itemColumnKey, itemColumnValue) in data">
+                        <td>{{ itemColumnKey }}</td>
+                        <td><input type="text" ng-model="data[itemColumnKey]"/></td>
+                    </tr>
+                </table>
+            </div>
+        </span>
+    </div>
+</div>

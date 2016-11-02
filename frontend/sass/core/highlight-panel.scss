@@ -1,0 +1,37 @@
+// Configure highlight panel component
+$highlight-panel-border-thickness: 3px;
+$highlight-panel-border-radius: 6px;
+$highlight-panel-top-padding: 20px;
+$highlight-panel-title-font-name: 'Abel', sans-serif;
+$highlight-panel-title-font-size: 16px;
+$highlight-panel-title-color: #FFFFFF;
+
+.highlight-panel {
+  position: relative;
+  padding-top: $highlight-panel-top-padding;
+  border: $highlight-panel-border-thickness solid #000;
+  border-radius: $highlight-panel-border-radius;
+
+  .highlight-panel-title {
+    display: inline-block;
+    position: absolute;
+    left: 0px - $highlight-panel-border-thickness;
+    top: 0px - $highlight-panel-border-thickness;
+    background-color: #000;
+    color: $highlight-panel-title-color;
+    padding: 2px $highlight-panel-top-padding;
+    border-radius: $highlight-panel-border-radius / 2;
+    font-family: $highlight-panel-title-font-name;
+    font-size: $highlight-panel-title-font-size;
+
+    &.green { background-color: #006600; }
+    &.red { background-color: #660000; }
+    &.blue { background-color: #000066; }
+    &.orange { background-color: #de770f; }
+  }
+
+  &.green { border-color: #006600; }
+  &.red { border-color: #660000; }
+  &.blue { border-color: #000066; }
+  &.orange { border-color: #de770f; }
+}

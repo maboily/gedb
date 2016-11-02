@@ -1,0 +1,141 @@
+/** Core List elements styles */
+.filter.panel {
+  padding: 10px;
+  background-color: #EEE;
+  margin-bottom: 5px;
+  border: 1px solid #CCC;
+
+  select, input {
+    background-color: #FFF;
+    border: 1px solid #888;
+    color: #333;
+    font-size: 12px;
+    height: 30px;
+    padding: 0 5px;
+  }
+
+  label {
+    color: #000;
+    font-size: 12px;
+  }
+}
+
+.new-custom-filter.panel {
+  background-color: #333;
+  padding: 5px;
+  border: 1px solid #444;
+
+  label {
+    font-size: 12px;
+  }
+
+  select {
+    font-size: 12px;
+    padding: 0;
+    height: 20px;
+    margin: 0;
+  }
+
+  input[type=button] {
+    width: 100%;
+    font-size: 14px;
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.filters.panel {
+  padding: 10px;
+  font-size: 12px;
+  line-height: 30px;
+  margin-bottom: 5px;
+}
+
+.custom-filter.panel {
+  background-color: #333;
+  padding: 5px;
+  margin: 0 0 2px 0;
+  border: 1px solid #444;
+  color: #FFF;
+  font-size: 12px;
+  line-height: normal;
+
+  label {
+    font-size: 12px;
+  }
+
+  input[type=button] {
+    margin: 0;
+    font-size: 12px;
+    display: inline;
+    width: 80px;
+    padding: 5px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #555;
+    box-shadow: none;
+  }
+
+  select {
+    font-size: 12px;
+    height: 25px;
+    padding: 5px;
+    margin: 0;
+    width: auto;
+    float: right;
+  }
+
+  .filter-details {
+    input {
+      display: inline;
+      width: 70px;
+      height: 25px;
+      font-size: 11px;
+      margin-bottom: 0 !important;
+    }
+  }
+}
+
+.pager.panel {
+  margin: 0px;
+  background-color: #222;
+  text-align: center;
+  border: 1px solid #222;
+  padding: 5px 0;
+
+  ul.pagination {
+    li.current {
+      a {
+        background: #555;
+      }
+    }
+
+    li {
+      a {
+        color: #FFF;
+      }
+
+      a:hover {
+        background: #888;
+      }
+    }
+  }
+}
+
+ul.pagination {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.transparent.panel {
+  background-color: transparent;
+  border: none;
+}
+
+.centered.panel {
+  text-align: center;
+}
+

@@ -1,0 +1,62 @@
+<p>This page is an aggregate of all the changelogs related to the Renaissance server. If you notice anything is amiss, leave a message at the concerned topic in forums.</p>
+
+<div class="admin navbar panel" ng-show="permissions.tools.changelog.new || permissions.tools.changelog.edit">
+    <button class="success button small" ng-hide="isEditing" ng-disabled="!permissions.tools.changelog.new" ng-click="createNewChangelog()">New Revision</button>
+    <button class="warning button small" ng-hide="isEditing" ng-disabled="!permissions.tools.changelog.edit || !currentChangelog.id" ng-click="editCurrentRevision()">Edit Current Revision</button>
+    <button class="alert button small" ng-hide="isEditing" ng-disabled="!permissions.tools.changelog.delete || !currentChangelog.id" ng-click="deleteCurrentRevision()">Delete Current Revision</button>
+    <button class="success button small" ng-show="isEditing" ng-click="saveChanges()">Save</button>
+    <button class="alert button small" ng-show="isEditing" ng-click="cancelChanges()">Cancel</button>
+</div>
+
+<section class="changelog-main-content">
+    <div ng-show="isEditing">
+        <h3>Edit Changelog Revision</h3>
+
+        <label>Descriptive Title
+            <input type="text" ng-model="editingChangelog.title" />
+        </label>
+
+        <label>
+            <input type="checkbox" ng-model="editingChangelog.is_current" /> Make this the default/active changelog revision
+        </label>
+
+        <h4>Changelog revision content</h4>
+
+        <pre id="changelog-editor"></pre>
+    </div>
+
+    <div ng-show="!isEditing">
+        <div marked="currentChangelog.content" class="changelog-view">
+
+        </div>
+
+        <p ng-hide="currentChangelog.id">
+            <em>There is no changelog revision selected</em>
+        </p>
+    </div>
+</section>
+
+<hr />
+
+<section class="revisions-details">
+    <h3>Changelog revisions history</h3>
+
+    <p>The revisions are shown in descending creation date order.</p>
+
+    <ul class="changelog-revisions-list">
+        <li ng-repeat="revision in revisions">
+            <a href="javascript: void(0)" ng-click="loadChangelog(revision.id)" ng-class="{ active: revision.id == currentChangelog.id }">
+                {{ revision.title }} <span ng-show="revision.is_current == true">(This is the current default revision)</span>
+
+                <p>Created at {{ revision.created_at }} / Last edited at {{ revision.updated_at }}</p>
+            </a>
+        </li>
+    </ul>
+
+    <p ng-hide="revisions.length"><em>No revisions were found</em></p>
+
+
+</section>
+
+
+

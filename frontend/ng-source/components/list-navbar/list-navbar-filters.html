@@ -1,0 +1,23 @@
+<li stop-click-events>
+    <div class="f-dropdown list-navbar-dropdown filters-dropdown" >
+        <div class="simple-filters" ng-if="!useCustomFiltering" ng-transclude>
+
+        </div>
+
+        <div class="custom-filters" ng-if="useCustomFiltering">
+            <custom-filters metadata="metadata" active-filters="signalFiltersUpdated(filters)"></custom-filters>
+        </div>
+
+        <span ng-show="customFiltersVisible">
+            <input type="checkbox" ng-model="useCustomFiltering" id="toggleAdvancedFilters" ng-change="signalFiltersUpdated([])" />
+            <label>Enable custom filters</label>
+        </span>
+
+    </div>
+    <div tooltip-html-unsafe="<span class='list-navbar-tooltip'><p>{{ activeFilters.filtersCount ? activeFilters.filtersCount : '0' }} active filters.</p> <p><em>(Click to change)</em></p></span>" tooltip-placement="bottom">
+        <a dropdown-toggle=".filters-dropdown">
+            <span class="fi-eye icon" />
+            {{ activeFilters.filtersCount ? activeFilters.filtersCount : '0' }}
+        </a>
+    </div>
+</li>

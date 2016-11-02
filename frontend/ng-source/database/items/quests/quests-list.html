@@ -1,0 +1,58 @@
+<div ui-view>
+    <list-navbar>
+        <list-navbar-section side="'left'">
+            <list-navbar-filters active-filters="activeFilters" metadata="metadata"
+                                 custom-filters-visible="true" filters-updated="filtersUpdated(filters)">
+                <label>Name Contains
+                    <input type="text" ng-model="simpleFilters.nameContains" ng-change="recompileSimpleFilters()" />
+                </label>
+            </list-navbar-filters>
+        </list-navbar-section>
+
+        <list-navbar-section side="'right'">
+            <list-navbar-sorting metadata="metadata" current-sort-name="searchSettings.orderBy"
+                                 current-sort-direction="searchSettings.orderDirection"
+                                 sort-updated="sortUpdated(sortName, sortDirection)"></list-navbar-sorting>
+
+            <list-navbar-paging current-paging="searchSettings.elementsPerPage" available-paging="metadata.availablePaging"
+                                paging-updated="pagingUpdated(paging)"></list-navbar-paging>
+        </list-navbar-section>
+    </list-navbar>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+
+    <div class="items database quests list" ng-class="listLoading ? 'loading' : ''">
+        <div class="database quest group" ng-class="searchSettings.groupBy != '' ? 'active' : ''"
+             ng-repeat="questGroup in data">
+            <span class="group-title">{{ questGroup.groupName }}</span>
+
+            <div class="database quest panel" ng-repeat="quest in questGroup.data"
+                 ng-class="quest.deleted_at ? 'deleted' : ''">
+                <div class="row">
+                    <div class="columns large-12">
+                        <item-admin-bar item="quest" permission-namespace="'quests'"
+                                        delete-method="deleteItem(item)" restore-method="restoreItem(item)">
+
+                        </item-admin-bar>
+                    </div>
+                </div>
+
+                <div class="item-description">
+                    <img ng-src="/images/illust/{{ quest.ImgFileName }}.png" class="item-image"/>
+
+                    <a class="title" ui-sref="app.database.items.quests.view({id: quest.ID})">{{ quest.ItemName }}</a>
+
+                    <div class="description" ng-bind-html="quest.ParsedDesc"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+</div>

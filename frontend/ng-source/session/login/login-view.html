@@ -1,0 +1,19 @@
+<section ui-view>
+    <section ng-controller="LoginCtrl">
+        <h2>Login</h2>
+
+        <div class="row">
+            <div class="columns large-12">
+                <foundation-text model="loginCredentials.username" label="'Username'"
+                                 validation-errors="validationErrors.username"/>
+            </div>
+
+            <div class="columns large-12">
+                <foundation-text model="loginCredentials.password" label="'Password'" is-password="true"
+                                 validation-errors="validationErrors.password"/>
+            </div>
+
+            <button ng-click="attemptLogin()">Login</button>
+        </div>
+    </section>
+</section>

@@ -1,0 +1,85 @@
+<div ui-view>
+    <list-navbar>
+        <list-navbar-section side="'left'">
+            <list-navbar-filters active-filters="activeFilters" metadata="metadata"
+                                 custom-filters-visible="true" filters-updated="filtersUpdated(filters)">
+                <label>Name Contains
+                    <input type="text" ng-model="simpleFilters.nameContains" ng-change="recompileSimpleFilters()" />
+                </label>
+            </list-navbar-filters>
+        </list-navbar-section>
+
+        <list-navbar-section side="'right'">
+            <list-navbar-sorting metadata="metadata" current-sort-name="searchSettings.orderBy"
+                                 current-sort-direction="searchSettings.orderDirection"
+                                 sort-updated="sortUpdated(sortName, sortDirection)"></list-navbar-sorting>
+
+            <list-navbar-paging current-paging="searchSettings.elementsPerPage" available-paging="metadata.availablePaging"
+                                paging-updated="pagingUpdated(paging)"></list-navbar-paging>
+        </list-navbar-section>
+    </list-navbar>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+
+    <div class="items database necklaces list" ng-class="listLoading ? 'loading' : ''">
+        <div class="database necklace group" ng-class="searchSettings.groupBy != '' ? 'active' : ''"
+             ng-repeat="necklaceGroup in data">
+            <span class="group-title">{{ necklaceGroup.groupName }}</span>
+
+            <div class="database necklace panel" ng-repeat="necklace in necklaceGroup.data"
+                 ng-class="necklace.deleted_at ? 'deleted' : ''">
+                <div class="row">
+                    <div class="columns large-12">
+                        <item-admin-bar item="necklace" permission-namespace="'necklaces'"
+                                        delete-method="deleteItem(item)" restore-method="restoreItem(item)">
+
+                        </item-admin-bar>
+                    </div>
+                </div>
+
+                <div class="item-description">
+                    <img ng-src="/images/illust/{{ necklace.ImgFileName }}.png" class="item-image"/>
+
+                    <a class="title" ui-sref="app.database.items.necklaces.view({id: necklace.ID})">{{ necklace.ItemName }}</a>
+                    <small class="subtitle">{{ necklace.ReqToolTip }}</small>
+
+                    <div class="description" ng-bind-html="necklace.ParsedDesc"></div>
+                </div>
+
+                <div class="row" vertilize-container>
+                    <div class="columns medium-4">
+                        <div class="green highlight-panel database-options" vertilize>
+                            <span class="green highlight-panel-title">Stats</span>
+
+                            <ul ng-bind-html="necklace.StatsHTML"></ul>
+                        </div>
+                    </div>
+
+                    <div class="columns medium-4">
+                        <div class="blue highlight-panel database-options" vertilize>
+                            <span class="blue highlight-panel-title">Enchantments</span>
+
+                            <ul ng-bind-html="necklace.EnchantmentsHTML"></ul>
+                        </div>
+                    </div>
+
+                    <div class="columns medium-4">
+                        <div class="red highlight-panel database-options" vertilize>
+                            <span class="red highlight-panel-title">Recipe</span>
+
+                            <ul ng-bind-html="necklace.RecipeHTML"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+</div>

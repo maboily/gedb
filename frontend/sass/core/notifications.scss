@@ -1,0 +1,14 @@
+/** Notifications system styles */
+.alert-box {
+  margin: 2px;
+}
+
+/** Notifications placement */
+.alerts-box {
+  position: fixed;
+  left: 0;
+  top: 0;
+  max-width: 100%;
+  width: 500px;
+  z-index: 1000;
+}

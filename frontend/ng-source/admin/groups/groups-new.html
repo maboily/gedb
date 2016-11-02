@@ -1,0 +1,31 @@
+<div ui-view>
+    <div class="admin navbar panel">
+        <button class="success button tiny" ng-click="saveGroup()">Save</button>
+        <button class="alert button tiny" ui-sref="app.admin.groups">Cancel</button>
+    </div>
+
+    <h3>General Information</h3>
+
+    <div class="form-section panel">
+        <div class="row">
+            <div class="large-12 columns">
+                <foundation-text model="group.name" validation-errors="validationErrors.name" label="'Name'" />
+            </div>
+        </div>
+    </div>
+
+    <h3>Permissions</h3>
+
+    <div class="permissions-listing panel">
+        <section ng-repeat="permissionCategory in permissionCategories">
+            <h4>{{ permissionCategory.name }}</h4>
+
+            <foundation-checkbox ng-repeat="permission in permissionCategory.permissions" model="permission.isAssigned" label="permission.description" />
+        </section>
+    </div>
+
+    <div class="admin navbar panel">
+        <button class="success button tiny" ng-click="saveGroup()">Save</button>
+        <button class="alert button tiny" ui-sref="app.admin.groups">Cancel</button>
+    </div>
+</div>

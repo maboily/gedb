@@ -1,0 +1,4 @@
+<label>{{ label }}
+    <span class="alert label" ng-repeat="validationError in validationErrors">{{ validationError }}</span>
+    <input type="{{ isPassword ? 'password' : 'text' }}" ng-model="model" />
+</label>

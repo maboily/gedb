@@ -1,0 +1,26 @@
+.cw-map-frame {
+  overflow-x: scroll;
+  position: relative;
+
+  .cw-map-picture {
+    max-width: none;
+  }
+
+  .cw-map-point {
+    position: absolute;
+    width: 200px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .cw-map-point-edit {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #000;
+    text-align: center;
+    box-shadow: none;
+    height: auto;
+    padding: 0;
+  }
+}

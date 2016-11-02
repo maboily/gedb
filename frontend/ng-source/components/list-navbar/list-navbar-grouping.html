@@ -1,0 +1,16 @@
+<li>
+    <div tooltip-html-unsafe="<span class='list-navbar-tooltip'><p>{{ currentGroupingName == '' ? 'Results are not grouped.' : 'Results are grouped by ' + metadata.columns[currentGroupingName] }} ({{ currentGroupingDirection == 'Asc' ? 'Ascending' : 'Descending' }})</p> <p><em>(Click to change)</em></p></span>" tooltip-placement="bottom">
+        <a dropdown-toggle="#armors-grouping-dropdown">
+            <span class="fi-results icon" />
+            {{ currentGroupingName == '' ? '(None)' : metadata.columns[currentGroupingName] }}
+        </a>
+    </div>
+    <ul class="f-dropdown list-navbar-dropdown" id="armors-grouping-dropdown">
+        <li ng-click="signalGroupingUpdated('', '')" ng-class="currentGroupingName == '' ? 'active' : ''" ng-if="noneFilterEnabled">
+            (None)
+        </li>
+        <li ng-repeat="grouping in metadata.availableGroups" ng-click="signalGroupingUpdated(grouping.groupName, grouping.groupDirection)" ng-class="currentGroupingName == grouping.groupName && currentGroupingDirection == grouping.groupDirection ? 'active' : ''">
+            Grouped by {{ metadata.columns[grouping.groupName] }} ({{ grouping.groupDirection == 'Asc' ? 'Ascending' : 'Descending' }})
+        </li>
+    </ul>
+</li>

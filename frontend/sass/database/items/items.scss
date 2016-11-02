@@ -1,0 +1,188 @@
+/** Items database core styles */
+// Item Group choice
+.items-list {
+  list-style-type: none;
+  margin: 0;
+
+  img {
+    width: 64px;
+    height: 64px;
+    float: left;
+    margin: 5px;
+  }
+
+  li:hover {
+    background-color: #DDD;
+    border: 1px solid #444;
+  }
+
+  li {
+    display: block;
+    background-color: #EEE;
+    border: 1px solid #555;
+    margin-bottom: 2px;
+
+    a {
+      display: block;
+      width: 100%;
+      line-height: 53px;
+      padding: 10px;
+      font-size: 20px;
+      color: #333;
+    }
+  }
+}
+
+// Panels
+.database.panel {
+  background-color: #fafafa;
+  color: #333;
+  padding: 10px;
+  margin: 0 0 2px 0;
+  border: 1px solid #CCC;
+
+  a.title:hover {
+    color: #006080;
+  }
+
+  a.title {
+    color: #0078a0;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  small.subtitle {
+    font-size: 12px;
+    display: block;
+  }
+
+  .item-description {
+    min-height: 64px + 10px;
+    margin-bottom: 5px;
+
+    .description {
+      margin-left: 74px;
+    }
+  }
+
+  .item-image {
+    float: left;
+    width: 64px;
+    height: 64px;
+    margin: 5px;
+  }
+
+  /** Database Options widget */
+  .database-options {
+    font-size: 14px;
+    color: #111;
+
+    .enchant-rate {
+      position: absolute;
+      right: 0;
+    }
+
+    .rare-enchant {
+      font-weight: bold;
+    }
+
+    ul {
+      font-size: 12px;
+      padding: 10px;
+      margin: 0;
+
+      li {
+        list-style-type: none;
+        padding: none;
+        position: relative;
+      }
+    }
+  }
+
+  .items-list {
+    list-style-type: none;
+    margin: 0;
+
+    img {
+      width: 64px;
+      height: 64px;
+      float: left;
+      margin: 5px;
+    }
+
+    li:hover {
+      background-color: #DDD;
+      border: 1px solid #444;
+    }
+
+    li {
+      display: block;
+      background-color: #EEE;
+      border: 1px solid #555;
+      margin-bottom: 2px;
+
+      a {
+        display: block;
+        width: 100%;
+        line-height: 53px;
+        padding: 10px;
+        font-size: 20px;
+        color: #333;
+      }
+    }
+  }
+
+  .highlight-panel {
+    margin-bottom: 5px;
+  }
+}
+
+.database.panel.deleted {
+  opacity: 0.5;
+}
+
+// Item list view
+.items.database.loading {
+  opacity: 0.25;
+}
+
+.items.database.list {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  .group.active {
+    background-color: #CCC;
+    border: 1px solid #999;
+    padding: 10px;
+    margin: 10px 0;
+
+    .group-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+}
+
+// Recipes icons
+.recipe-item-thumbnail {
+  width: 32px;
+  margin-right: 5px;
+}
+
+@import "armors";
+@import "artifacts";
+@import "back-costumes";
+@import "belts";
+@import "boots";
+@import "consumables";
+@import "costumes";
+@import "earrings";
+@import "face-costumes";
+@import "gloves";
+@import "necklaces";
+@import "others";
+@import "quests";
+@import "recipes";
+@import "rings";
+@import "stance-books";
+@import "weapons";

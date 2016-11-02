@@ -1,0 +1,117 @@
+<div ui-view>
+    <list-navbar>
+        <list-navbar-section side="'left'">
+            <list-navbar-filters active-filters="activeFilters" metadata="metadata"
+                                 custom-filters-visible="true" filters-updated="filtersUpdated(filters)">
+                <label>Name Contains
+                    <input type="text" ng-model="simpleFilters.nameContains" ng-change="recompileSimpleFilters()" />
+                </label>
+
+                <label>Armor Type is
+                    <select ng-model="simpleFilters.armorType" ng-change="recompileSimpleFilters()">
+                        <option value="">(Any)</option>
+                        <option value="{{ armorType }}" ng-repeat="armorType in metadata.availableFilters.ClassTypeQualifier.values | orderBy:armorType">{{ armorType }}</option>
+                    </select>
+                </label>
+            </list-navbar-filters>
+
+            <list-navbar-grouping metadata="metadata" current-grouping-name="searchSettings.groupBy"
+                                  current-grouping-direction="searchSettings.groupOrderDirection"
+                                  grouping-updated="groupingUpdated(groupingName, groupingDirection)"
+                                  none-filter-enabled="true"></list-navbar-grouping>
+        </list-navbar-section>
+
+        <list-navbar-section side="'right'">
+            <list-navbar-sorting metadata="metadata" current-sort-name="searchSettings.orderBy"
+                                 current-sort-direction="searchSettings.orderDirection"
+                                 sort-updated="sortUpdated(sortName, sortDirection)"></list-navbar-sorting>
+
+            <list-navbar-paging current-paging="searchSettings.elementsPerPage" available-paging="metadata.availablePaging"
+                                paging-updated="pagingUpdated(paging)"></list-navbar-paging>
+        </list-navbar-section>
+    </list-navbar>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+
+    <div class="items database armors list" ng-class="listLoading ? 'loading' : ''">
+        <div class="database armor group" ng-class="searchSettings.groupBy != '' ? 'active' : ''"
+             ng-repeat="armorGroup in data">
+            <span class="group-title">{{ armorGroup.groupName }}</span>
+
+            <div class="database armor panel" ng-repeat="armor in armorGroup.data"
+                 ng-class="armor.deleted_at ? 'deleted' : ''">
+                <div class="row">
+                    <div class="columns large-12">
+                        <item-admin-bar item="armor" delete-method="deleteItem(item)" restore-method="restoreItem(item)"
+                                        permission-namespace="'armors'">
+
+                        </item-admin-bar>
+                    </div>
+                </div>
+
+                <div class="item-description">
+                    <img ng-src="/images/illust/{{ armor.ImgFileName }}.png" class="item-image"/>
+
+                    <a class="title" ui-sref="app.database.items.armors.view({id: armor.ID})">{{ armor.ItemName }}</a>
+                    <small class="subtitle"><strong ng-show="armor.SeriesOrder > 1">{{ armor.SeriesName }} Series - </strong>{{ armor.ReqToolTip }}</small>
+
+                    <div class="description" ng-bind-html="armor.ParsedDesc"></div>
+                </div>
+
+                <div class="item-thumbnails">
+                    <div ng-repeat="thumbnail in armor.thumbnails" class="item-thumbnail">
+                        <span class="title">{{ thumbnail.title }}</span>
+
+                        <div class="thumbnail-image">
+                            <img src="/thumbnails/{{ thumbnail.id }}?small=1" ng-click="openThumbnailModal(thumbnail)" />
+                        </div>
+                    </div>
+
+                    <div class="item-thumbnail new-thumbnail" ng-show="permissions.database.items.thumbnails.new">
+                        <input type="text" placeholder="Enter title" ng-model="newThumbnailTitle" />
+
+                        <div class="thumbnail-upload" ng-show="newThumbnailTitle != ''">
+                            <input type="file" ng-file-select ng-model="newThumbnailFile" value="Select File"
+                                   ng-file-change="goUpload(armor.ID, newThumbnailTitle, newThumbnailFile)" ng-multiple="false" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" vertilize-container>
+                    <div class="columns medium-4">
+                        <div class="green highlight-panel database-options" vertilize>
+                            <span class="green highlight-panel-title">Stats</span>
+
+                            <ul ng-bind-html="armor.StatsHTML"></ul>
+                        </div>
+                    </div>
+
+                    <div class="columns medium-4">
+                        <div class="blue highlight-panel database-options" vertilize>
+                            <span class="blue highlight-panel-title">Enchantments</span>
+
+                            <ul ng-bind-html="armor.EnchantmentsHTML"></ul>
+                        </div>
+                    </div>
+
+                    <div class="columns medium-4">
+                        <div class="red highlight-panel database-options" vertilize>
+                            <span class="red highlight-panel-title">Recipe</span>
+
+                            <ul ng-bind-html="armor.RecipeHTML"></ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+</div>

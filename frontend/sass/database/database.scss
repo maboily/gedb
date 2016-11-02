@@ -1,0 +1,223 @@
+/** Global database styles */
+.database.panel {
+  .fire {
+    color: #660000;
+  }
+
+  .ice {
+    color: #003366;
+  }
+
+  .lightning {
+    color: #663300;
+  }
+
+  .mental {
+    color: #990033;
+  }
+
+  .debuff {
+    color: #330099;
+  }
+}
+
+.xml-information {
+  font-family: Arial;
+
+  .xml-attribute {
+    font-weight: bold;
+  }
+
+  .xml-value {
+    color: #555;
+  }
+}
+
+/** Database lists */
+.list.top-bar {
+  font-family: 'Open Sans';
+  height: 60px;
+
+  label {
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  select {
+    font-size: 12px;
+    margin-bottom: 2px;
+    color: #FFF;
+    background-color: #555;
+    border: 1px solid #FFF;
+    font-family: 'Open Sans';
+  }
+
+  li {
+    padding: 2px;
+    height: 60px;
+  }
+}
+
+/** List navbar */
+.list-navbar {
+  background-color: #333;
+  height: 40px;
+  max-width: 1000px;
+  width: 100%;
+  z-index: 100;
+
+  .tooltip {
+    text-align: center;
+    z-index: 1000;
+    background-color: #111;
+    margin-top: -11px;
+
+    p {
+      color: #FFF;
+      font-size: 12px;
+      margin: 0;
+    }
+  }
+
+  div.list-navbar-dropdown {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  ul.list-navbar-dropdown {
+    max-width: 300px;
+    > li {
+      padding: 5px;
+      color: #FFF;
+      line-height: 30px;
+    }
+
+    > li:hover, > li.active:hover {
+      background-color: #777;
+    }
+
+    > li.active {
+      background-color: #444;
+    }
+  }
+
+  ul.list-navbar-dropdown:before, ul.list-navbar-dropdown:after {
+    border: none;
+  }
+
+  .list-navbar-dropdown:before {
+    border-color: transparent transparent #000;
+  }
+
+  .list-navbar-dropdown {
+    margin-top: 10px;
+    background-color: #000;
+    padding: 5px;
+    border: 1px solid #777;
+    z-index: 1001;
+
+    p, label, h1, h2, h3, h4, h5, h6 {
+      color: #EEE;
+    }
+
+    select, input[type=text] {
+      background-color: #333;
+      border: 1px solid #555;
+      color: #EEE;
+      margin-bottom: 5px;
+    }
+  }
+
+  .icon {
+    vertical-align: middle;
+    font-size: 20px;
+    margin: 0 2px;
+  }
+
+  ul.navbar-section {
+    list-style-type: none;
+    margin: 0 10px;
+
+    > * > li {
+      display: inline-block;
+      font-size: 14px;
+      line-height: 40px;
+      padding: 0 5px;
+
+      > div > a {
+        color: #FFF;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 640px) {
+    .tooltip {
+      display: none !important; // !important since a display: block will be put directly on the element
+    }
+
+    ul.list-navbar-dropdown, div.list-navbar-dropdown {
+      left: 0px !important; // !important since a left attribute will be put directly on the element
+      width: 100%;
+      max-width: 640px;
+    }
+
+    .list-navbar-dropdown:before, .list-navbar-dropdown:after {
+      border: none;
+    }
+  }
+}
+
+// Thumbnails
+.item-thumbnails {
+  overflow: hidden;
+
+  .item-thumbnail {
+    display: inline-block;
+    text-align: center;
+    margin: 0 10px 10px 0;
+
+    .title {
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .thumbnail-image {
+      width: 150px;
+      line-height: 150px;
+
+      img {
+        vertical-align: top;
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+        cursor: pointer;
+      }
+
+      img:hover {
+        filter: brightness(140%);
+        -webkit-filter: brightness(140%);
+      }
+    }
+  }
+}
+
+// Thumbnail modal
+.thumbnail-modal {
+  padding: 2px;
+  background-color: #000;
+  text-align:center;
+  border: 0;
+}
+
+/** Database loading panels */
+.database.loading.panel {
+  height: 300px;
+  width: 100%;
+  background: url('/images/ajax-loader.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #FFF;
+  border: none;
+}
+
+@import "items/items";

@@ -1,0 +1,137 @@
+
+<label>Custom filters</label>
+
+<div class="new-custom-filter panel">
+    <div class="row">
+        <div class="columns large-12">
+            <select ng-model="selectedNewFilter">
+                <option>(Select an entry to filter by)</option>
+                <option ng-repeat="filterData in metadata.availableFilters | toArray | orderBy:getFilterDescription" value="{{ filterData.$key }}">
+                    {{ getFilterDescription(filterData) }}
+                </option>
+            </select>
+
+            <button type="button" class="tiny success button" ng-click="addNewRule()">
+                Add a filter
+            </button>
+        </div>
+    </div>
+</div>
+
+<label>Active filters</label>
+
+<div class="custom-filter panel" ng-show="activeFilters.length == 0">
+    <em>No filters are currently active</em>
+</div>
+
+<section ng-repeat="(activeFilterKey, activeFilter) in activeFilters">
+    <div class="custom-filter panel">
+        <div class="row">
+            <div class="columns large-12">
+                <!-- Determines filter types to show according to column type -->
+                {{ metadata.columns[activeFilter.name] }} Rule <a ng-click="removeFilter(activeFilterKey)">[Delete]</a>
+                <span ng-show="activeFilter.type == 'text'">
+                    <select ng-model="activeFilter.filterMode">
+                        <option value="Contains">Contains</option>
+                        <option value="IsEmpty">Is Empty</option>
+                        <option value="EqualsTo">Equals To</option>
+                    </select>
+                </span>
+
+                <span ng-show="activeFilter.type == 'boolean'">
+                    <select ng-model="activeFilter.filterMode">
+                        <option value="IsTrue">Is True</option>
+                        <option value="IsFalse">Is False</option>
+                    </select>
+                </span>
+
+                <span ng-show="activeFilter.type == 'number'">
+                    <select ng-model="activeFilter.filterMode">
+                        <option value="EqualsTo">Equals To</option>
+                        <option value="GreaterThan">Greater Than</option>
+                        <option value="LowerThan">Lower Than</option>
+                        <option value="GreaterOrEqualTo">Greater or Equal To</option>
+                        <option value="LowerOrEqualTo">Lower or Equal To</option>
+                        <option value="IsBetweenExclusive">Between (Exclusive)</option>
+                        <option value="IsBetweenInclusive">Between (Inclusive)</option>
+                    </select>
+                </span>
+
+                <span ng-show="activeFilter.type == 'choice'">
+                    <select ng-model="activeFilter.filterMode">
+                        <option value="EqualsTo">Is Exactly</option>
+                        <option value="NotEqualsTo">Is Not</option>
+                    </select>
+                </span>
+
+            </div>
+
+            <div class="columns large-12 filter-details">
+                <!-- Determines inputs to show according to filter type -->
+                <span ng-switch="activeFilter.filterMode">
+                    <span ng-switch-when="Contains">
+                        <strong>{{ activeFilter.description }}</strong> contains the text <input type="text" ng-model="activeFilter.value1" />
+                    </span>
+
+                    <span ng-switch-when="IsEmpty">
+                        <strong>{{ activeFilter.description }}</strong> is empty.
+                    </span>
+
+                    <span ng-switch-when="EqualsTo">
+                        <strong>{{ activeFilter.description }}</strong> is
+                        <input type="text" ng-model="activeFilter.value1" ng-show="activeFilter.type != 'choice'" />
+                        <select ng-model="activeFilter.value1" ng-show="activeFilter.type == 'choice'">
+                            <option ng-repeat="(filterKey, filterValue) in activeFilter.values" value="{{ filterKey }}">{{ filterValue }}</option>
+                        </select>
+                    </span>
+
+                    <span ng-switch-when="NotEqualsTo">
+                        <strong>{{ activeFilter.description }}</strong> is not
+                        <input type="text" ng-model="activeFilter.value1" ng-show="activeFilter.type != 'choice'" />
+                        <select ng-model="activeFilter.value1" ng-show="activeFilter.type == 'choice'">
+                            <option ng-repeat="(filterKey, filterValue) in activeFilter.values" value="{{ filterKey }}">{{ filterValue }}</option>
+                        </select>
+                    </span>
+
+                    <span ng-switch-when="IsTrue">
+                        <strong>{{ activeFilter.description }}</strong> is true.
+                    </span>
+
+                    <span ng-switch-when="IsFalse">
+                        <strong>{{ activeFilter.description }}</strong> is false.
+                    </span>
+
+                    <span ng-switch-when="GreaterThan">
+                        <strong>{{ activeFilter.description }}</strong> is greater than <input type="text" ng-model="activeFilter.value1" />
+                    </span>
+
+                    <span ng-switch-when="LowerThan">
+                        <strong>{{ activeFilter.description }}</strong> is lower than <input type="text" ng-model="activeFilter.value1" />
+                    </span>
+
+                    <span ng-switch-when="GreaterOrEqualTo">
+                        <strong>{{ activeFilter.description }}</strong> is greater or equal to <input type="text" ng-model="activeFilter.value1" />
+                    </span>
+
+                    <span ng-switch-when="LowerOrEqualTo">
+                        <strong>{{ activeFilter.description }}</strong> is lower or equal to <input type="text" ng-model="activeFilter.value1" />
+                    </span>
+
+                    <span ng-switch-when="IsBetweenExclusive">
+                        <strong>{{ activeFilter.description }}</strong> is exclusively between
+                        <input type="text" ng-model="activeFilter.value1" /> and <input type="text" ng-model="activeFilter.value2" />
+                    </span>
+
+                    <span ng-switch-when="IsBetweenInclusive">
+                        <strong>{{ activeFilter.description }}</strong> is inclusively between
+                        <input type="text" ng-model="activeFilter.value1" /> and <input type="text" ng-model="activeFilter.value2" />
+                    </span>
+                </span>
+            </div>
+
+            <!--div class="columns large-2">
+                <input type="button" class="button" ng-click="removeFilter(activeFilterKey)" value="Remove" />
+            </div-->
+        </div>
+    </div>
+</section>

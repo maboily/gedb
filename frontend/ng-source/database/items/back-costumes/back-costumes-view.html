@@ -1,0 +1,43 @@
+<div ui-view>
+    <div class="database loading panel" ng-show="itemLoading"></div>
+    <div ng-hide="itemLoading">
+        <div class="database backCostume panel">
+            <div class="item-description">
+                <img ng-src="/images/illust/{{ data.ImgFileName }}.png" class="item-image"/>
+
+                <a class="title" ui-sref="app.database.items.backCostumes.view({id: data.ID})">{{ data.ItemName }}</a>
+                <small class="subtitle">{{ data.ReqToolTip }}</small>
+
+                <div class="description" ng-bind-html="data.ParsedDesc"></div>
+            </div>
+
+            <div class="row">
+                <div class="columns medium-12">
+                    <div class="orange highlight-panel database-options">
+                        <span class="orange highlight-panel-title">Base Stats</span>
+
+                        <ul ng-bind-html="data.StatsHTML"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span ng-show="permissions.database.items.backCostumes.extendedView">
+            <h3>Column Details</h3>
+
+            <div class="database panel">
+                <table class="default-table" role="grid">
+                    <tr>
+                        <th width="200">Base Name</th>
+                        <th>Data</th>
+                    </tr>
+
+                    <tr ng-repeat="(itemColumnKey, itemColumnValue) in data">
+                        <td>{{ itemColumnKey }}</td>
+                        <td><input type="text" ng-model="data[itemColumnKey]"/></td>
+                    </tr>
+                </table>
+            </div>
+        </span>
+    </div>
+</div>

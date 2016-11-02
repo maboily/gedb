@@ -1,0 +1,88 @@
+/** Base Styles, such as default Font, default anchor, etc. */
+body {
+  background-color: #FFF;
+}
+
+body, h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Istok Web', sans-serif;
+  color: #333;
+}
+
+/** Default table style */
+table.default-table {
+  width: 100%;
+  border: 1px solid #999;
+
+  td, th {
+    border: 1px solid #999;
+
+    input[type="text"] {
+      margin-bottom: 0;
+    }
+  }
+
+  th {
+    background-color: #333;
+    color: #EEE;
+  }
+}
+
+/** Base parallax */
+.parallax-banner {
+  height: 400px;
+  background: url('images/banner.jpg');
+  background-size: cover;
+  position: relative;
+
+  .parallax-character {
+    position: absolute;
+    background: url('images/ge_vv.png');
+    background-size: cover;
+    width: 400px;
+    height: 300px;
+    top: 100px;
+  }
+
+  .parallax-text {
+    position: absolute;
+    font-size: 36px;
+    left: 300px;
+    top: 230px;
+  }
+}
+
+/** Pager */
+@media only screen and (max-width: 720px) {
+  .pager.panel {
+    .pagination {
+      li {
+        display: none;
+      }
+
+      li.current, li:nth-child(1), li:nth-child(2), li:nth-last-child(1), li:nth-last-child(2) {
+        display: block;
+      }
+
+      li.current a:before {
+        content: "Page: ";
+      }
+    }
+  }
+}
+
+/** Initial loading */
+.body.loading {
+  width: 100%;
+  display: table;
+  background: url('images/ajax-loader.gif') no-repeat center;
+}
+
+/** Hide loading zone by default */
+.loading-zone {
+  display: none;
+}
+
+.body.loading .loading-zone {
+  display: table-cell;
+  vertical-align: middle;
+}

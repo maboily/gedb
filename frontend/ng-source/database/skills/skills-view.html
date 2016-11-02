@@ -1,0 +1,74 @@
+<div ui-view>
+    <div class="database loading panel" ng-show="itemLoading"></div>
+
+    <div ng-hide="itemLoading">
+        <div class="database armor panel">
+            <div class="item-description">
+                <img ng-src="/images/illust/{{ data.ImgFileName }}.png" class="item-image"/>
+
+                <a class="title" ui-sref="app.database.skills.view({id: data.ID})">{{ data.Name }}</a>
+
+                <div class="description" ng-bind-html="data.ParsedDesc"></div>
+            </div>
+
+            <div class="row" vertilize-container>
+                <div class="columns medium-6">
+                    <div class="green highlight-panel database-options" vertilize>
+                        <span class="green highlight-panel-title">Usage</span>
+
+                        <ul ng-bind-html="data.UsageHTML"></ul>
+                    </div>
+                </div>
+
+                <div class="columns medium-6">
+                    <div class="blue highlight-panel database-options" vertilize>
+                        <span class="blue highlight-panel-title">Additional Stats</span>
+
+                        <ul ng-bind-html="data.AdditionalStatsHTML"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Levels</h3>
+
+        <ul class="labeled-panel-list title-size-100">
+            <li><span class="green labeled-panel-title">Level 1</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level1"></span></li>
+            <li><span class="green labeled-panel-title">Level 2</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level2"></span></li>
+            <li><span class="green labeled-panel-title">Level 3</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level3"></span></li>
+            <li><span class="green labeled-panel-title">Level 4</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level4"></span></li>
+            <li><span class="green labeled-panel-title">Level 5</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level5"></span></li>
+            <li><span class="green labeled-panel-title">Level 6</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level6"></span></li>
+            <li><span class="green labeled-panel-title">Level 7</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level7"></span></li>
+            <li><span class="green labeled-panel-title">Level 8</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level8"></span></li>
+            <li><span class="green labeled-panel-title">Level 9</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level9"></span></li>
+            <li><span class="orange labeled-panel-title">Level 10</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level10"></span></li>
+            <li><span class="red labeled-panel-title">Level 11</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level11"></span></li>
+            <li><span class="red labeled-panel-title">Level 12</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level12"></span></li>
+            <li><span class="red labeled-panel-title">Level 13</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level13"></span></li>
+            <li><span class="red labeled-panel-title">Level 14</span><span class="labeled-panel-content" ng-bind-html="data.LevelsHTML.Level14"></span></li>
+        </ul>
+
+        <span ng-show="permissions.database.items.armors.extendedView">
+            <h3>Column Details</h3>
+
+            <div class="database panel">
+                <table class="default-table" role="grid">
+                    <tr>
+                        <th width="200">Base Name</th>
+                        <th>Data</th>
+                    </tr>
+
+                    <tr ng-repeat="(itemColumnKey, itemColumnValue) in data">
+                        <td>{{ itemColumnKey }}</td>
+                        <td><input type="text" ng-model="data[itemColumnKey]"/></td>
+                    </tr>
+                </table>
+            </div>
+        </span>
+    </div>
+
+
+
+
+</div>

@@ -1,0 +1,32 @@
+# Laravel files
+/vendor
+composer.phar
+composer.lock
+.env.*
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea
+
+# Local files
+frontend/.sass-cache
+public/images/illust
+public/images/map_orpesia.jpg
+
+# Compiled files
+public/ng-app.js
+public/ng-partials.js
+public/preload.js
+public/desktop.js
+public/styles.css
+public/admin.js
+public/mobile.js
+
+# Frontend files
+frontend/additional_libs
+frontend/node_modules
+frontend/libs

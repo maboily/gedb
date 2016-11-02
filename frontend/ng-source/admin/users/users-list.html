@@ -1,0 +1,59 @@
+<div ui-view>
+    <list-navbar>
+        <list-navbar-section side="'left'">
+            <list-navbar-filters active-filters="activeFilters" metadata="metadata"
+                                 custom-filters-visible="true" filters-updated="filtersUpdated(filters)">
+                <label>Email Contains
+                    <input type="text" ng-model="simpleFilters.nameContains" ng-change="recompileSimpleFilters()" />
+                </label>
+            </list-navbar-filters>
+        </list-navbar-section>
+
+        <list-navbar-section side="'right'">
+            <list-navbar-sorting metadata="metadata" current-sort-name="searchSettings.orderBy"
+                                 current-sort-direction="searchSettings.orderDirection"
+                                 sort-updated="sortUpdated(sortName, sortDirection)"></list-navbar-sorting>
+
+            <list-navbar-paging current-paging="searchSettings.elementsPerPage" available-paging="metadata.availablePaging"
+                                paging-updated="pagingUpdated(paging)"></list-navbar-paging>
+        </list-navbar-section>
+    </list-navbar>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+
+    <div class="admin navbar panel">
+        <button class="success button small" ui-sref="app.admin.users.new" ng-disabled="!permissions.admin.users.new">New User</button>
+    </div>
+
+    <div class="admin users list" ng-class="listLoading ? 'loading' : ''">
+        <table class="default-table" ng-class="listLoading ? 'loading' : ''">
+            <tr>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+
+            <tr ng-repeat="user in data">
+                <td>{{ user.email }}</td>
+                <td>
+                    <button class="button tiny" ui-sref="app.admin.users.edit({id: user.id })" ng-disabled="!permissions.admin.users.edit">Edit</button>
+                    <button class="alert button tiny" ng-click="deleteUser(user)" ng-show="!user.deleted_at" ng-disabled="!permissions.admin.users.delete">Delete</button>
+                    <button class="success button tiny" ng-click="restoreUser(user)" ng-show="user.deleted_at" ng-disabled="!permissions.admin.users.delete">Restore</button>
+                </td>
+            </tr>
+
+            <tr ng-hide="data.length">
+                <td colspan="2">
+                    <em>No results were found</em>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="pager panel">
+        <pagination page="searchSettings.page" items-per-page="searchSettings.elementsPerPage"
+                    total-items="metadata.total" boundary-links="true" max-size="10"></pagination>
+    </div>
+</div>
